@@ -2,7 +2,7 @@
 # @Author: cody
 # @Date:   2016-07-21 08:13:01
 # @Last Modified 2016-08-11
-# @Last Modified time: 2016-08-11 15:10:24
+# @Last Modified time: 2016-08-11 15:14:13
 
 """
 This runs analysis over binary patterns to find similarities in
@@ -321,10 +321,12 @@ class BinaryTangent(object):
         # predictions = {'TF': 1, 'TFF': 1, 'T': 2}
         scores = [0.0] * longest_key(predictions)
         datapoints = 0
+
         # this mess of a loop below basically does this
         # {'TF': 1, 'TFF': 1, 'T': 2}  -->  [3, -2, -1]
         # this gives us a index of true's that have been
         # seen in the past to come after the current tangent
+
         for i in range(longest_key(predictions)):
             for k in predictions:
                 if len(k) > i:
@@ -335,16 +337,20 @@ class BinaryTangent(object):
                         if k[i] == 'F':
                             datapoints += 1
                             scores[i] -= 1.0
+
         # This snippet levels out the score's momentum. What
         # this portion was designed for was to smooth out the
         # change to let it understand what will come next:
         #   up 3, down 2, down 2 is the same as 3, 1, 0.
         # so
         #   score[3, -2, -1]  -->  score[3, 1, 0]
+
         for i in range(len(scores)):
             if i > 0:
                 scores[i] += scores[i - 1]
+
         final_score = (scores[-1] + datapoints) / (datapoints * 2)
+
         # this was being used to test the algorithm when I was first designing it.
         # print 'collected previous conclusions to this moment:\n{}'.format(predictions)
         # print 'score progression: {}'.format(scores)
