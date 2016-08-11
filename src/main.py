@@ -2,7 +2,7 @@
 # @Author: cody
 # @Date:   2016-07-21 08:13:01
 # @Last Modified 2016-08-11
-# @Last Modified time: 2016-08-11 11:13:13
+# @Last Modified time: 2016-08-11 11:16:14
 
 from collections import deque
 
@@ -316,14 +316,15 @@ class Binary_Tangent(object):
         Everything below this is crap for rendering the Binary_Tangent
     ==================================================================="""
 
-    def root_indent(self):
+    @staticmethod
+    def root_indent(node):
         """ calculates how far the root node needs to be indented """
         current_indent = 0
         farthest_indent = 0
-        _ = self.get_root()
-        while _.has_child():
-            _ = _.get_child()
-            if _.val:
+        node = node.get_root()
+        while node.has_child():
+            node = node.get_child()
+            if node.val:
                 current_indent -= 2
             else:
                 current_indent += 2
@@ -335,7 +336,7 @@ class Binary_Tangent(object):
     def indent_from_root(node):
         """ calculates the indent for the current node compared to the root """
         depth = node.depth
-        indent = node.root_indent()
+        indent = node.root_indent(node)
         node = node.get_root()
         while depth:
             depth -= 1
@@ -350,7 +351,7 @@ class Binary_Tangent(object):
     def get_indent(node):
         """ returns which indent function is correct for the node """
         if node.depth < 1:
-            return node.root_indent()
+            return node.root_indent(node)
         return node.indent_from_root(node)
 
     def render(self):
