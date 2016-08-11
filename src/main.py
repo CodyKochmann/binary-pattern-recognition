@@ -2,7 +2,7 @@
 # @Author: cody
 # @Date:   2016-07-21 08:13:01
 # @Last Modified 2016-08-11
-# @Last Modified time: 2016-08-11 10:50:55
+# @Last Modified time: 2016-08-11 10:52:47
 
 from collections import deque
 
@@ -389,14 +389,15 @@ class Binary_Tangent(object):
         pass
 
 def random_binary_pattern(length=16):
+    """ returns a list of random binary values to test against """
     from random import randint
     out = deque()
     while len(out) < length:
         out.append(randint(0, 1) < 1)
     return list(out)
 
-
 def line():
+    """ just a cleaner way to put dividers in the code's output """
     print '========================================================='
 
 
