@@ -3,3 +3,6 @@
 
 # compiled python files
 *.pyc
+
+# ignore any scratch files
+scratch*
