@@ -2,8 +2,11 @@
 # @Author: cody
 # @Date:   2016-07-21 08:13:01
 # @Last Modified 2016-08-11
-# @Last Modified time: 2016-08-11 11:37:48
+# @Last Modified time: 2016-08-11 13:30:04
 
+import sys
+sys.setrecursionlimit(1000000)
+from random import randint
 from collections import deque
 
 def longest_key(input_dict):
@@ -15,27 +18,24 @@ def longest_key(input_dict):
             longest = k
     return longest
 
-def calculate_similarity(list_one, list_two):
-    best_score = 0.0
-    if len(list_one) == len(list_two):
-        for i in range(len(list_one)):
-            if list_one[i] == list_two[i]:
-                best_score += 1.0
+def calculate_similarity(l_one, l_two):
+    """ calculates the similarity of two lists """
+    best_score = 0
+    # determine how many tests are needed
+    if len(l_one) is len(l_two):
+        tests = 1
     else:
-        if len(list_one) < len(list_two):
-            # switch the lists if one is bigger than two
-            list_one += list_two
-            list_two = list_one[:len(list_one) - len(list_two)]
-            list_one = list_one[len(list_two):]
-        for x in range(len(list_one) - len(list_two)):
-            similar = 0.0
-            for i in range(len(list_two)):
-                if list_one[i + x] == list_two[i]:
-                    similar += 1.0
-            if similar > best_score:
-                best_score = similar
-    return best_score / float(len(list_one))
-
+        len(l_one) - len(l_two)
+        if len(l_one) < len(l_two):
+            l_two, l_one = l_one, l_two
+    for offset in range(tests):
+        similar = 0
+        for i in range(len(l_two)):
+            if l_one[i+offset] is l_two[i]:
+                similar+=1
+        if similar > best_score:
+            best_score = similar
+    return best_score / float(len(l_one))
 
 def binary_str_to_pattern(i):
     """ returns the opposite of binary_pattern_to_str() """
@@ -386,7 +386,6 @@ class Binary_Tangent(object):
 
 def random_binary_pattern(length=16):
     """ returns a list of random binary values to test against """
-    from random import randint
     out = deque()
     while len(out) < length:
         out.append(randint(0, 1) < 1)
