@@ -2,7 +2,7 @@
 # @Author: cody
 # @Date:   2016-07-21 08:13:01
 # @Last Modified 2016-08-11
-# @Last Modified time: 2016-08-11 10:52:47
+# @Last Modified time: 2016-08-11 11:06:10
 
 from collections import deque
 
@@ -312,53 +312,50 @@ class Binary_Tangent(object):
             "similar_patterns": int(list_total(predictions.values()))
         }
 
-    # below is rendering crap.
+    """===================================================================
+        Everything below this is crap for rendering the Binary_Tangent
+    ==================================================================="""
 
     def root_indent(self):
-        # [True,False,False,True,False,True]
-        # calc how far is farthest false
-        root = self.get_root()
+        """ calculates how far the root node needs to be indented """
         current_indent = 0
         farthest_indent = 0
-        # noinspection PyShadowingNames
-        t = root
-        while t.has_child():
-            # noinspection PyShadowingNames
-            t = t.get_child()
-            if t.val:
+        _ = self.get_root()
+        while _.has_child():
+            _ = _.get_child()
+            if _.val:
                 current_indent -= 2
             else:
                 current_indent += 2
             if current_indent > farthest_indent:
                 farthest_indent = current_indent
-
         return farthest_indent
 
-    # noinspection PySimplifyBooleanCheck,PySimplifyBooleanCheck
     def indent_from_root(self):
+        """ calculates the indent for the current node compared to the root """
         depth = self.depth
         indent = self.root_indent()
-        # noinspection PyShadowingNames
-        t = self.get_root()
+        _ = self.get_root()
         i = 0
         while i < depth:
             i += 1
-            # noinspection PyShadowingNames
-            t = t.get_child()
-            if t.val == True:
+            _ = _.get_child()
+            if _.val == True:
                 indent += 2
-            if t.val == False:
+            if _.val == False:
                 indent -= 2
         return indent
 
     def get_indent(self):
+        """ returns which indent function is correct for the node """
         if self.depth < 1:
             return self.root_indent()
         else:
             indent = self.indent_from_root()
             return indent
 
-    def str(self):
+    def render(self):
+        """ recursively renders the entire Binary_Tangent in the CLI """
         if self.val:
             s = "T"
         else:
@@ -379,9 +376,9 @@ class Binary_Tangent(object):
         if self.child_count > 0:
             print ' ' * (indent - 1) + brackets
         if self.r:
-            self.r.str()
+            self.r.render()
         elif self.l:
-            self.l.str()
+            self.l.render()
 
     @staticmethod
     def gen_pattern_tree():
@@ -403,7 +400,7 @@ def line():
 
 if __name__ == '__main__':
     t = Binary_Tangent(random_binary_pattern(128))
-    t.str()
+    t.render()
     patterns = t.find_patterns()
     collection = patterns.pattern_collection
     line()
