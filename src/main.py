@@ -2,7 +2,7 @@
 # @Author: cody
 # @Date:   2016-07-21 08:13:01
 # @Last Modified 2016-08-11
-# @Last Modified time: 2016-08-11 11:06:10
+# @Last Modified time: 2016-08-11 11:09:26
 
 from collections import deque
 
@@ -346,13 +346,12 @@ class Binary_Tangent(object):
                 indent -= 2
         return indent
 
-    def get_indent(self):
+    @staticmethod
+    def get_indent(node):
         """ returns which indent function is correct for the node """
-        if self.depth < 1:
-            return self.root_indent()
-        else:
-            indent = self.indent_from_root()
-            return indent
+        if node.depth < 1:
+            return node.root_indent()
+        return node.indent_from_root()
 
     def render(self):
         """ recursively renders the entire Binary_Tangent in the CLI """
@@ -360,7 +359,7 @@ class Binary_Tangent(object):
             s = "T"
         else:
             s = "F"
-        indent = self.get_indent()
+        indent = self.get_indent(self)
         print ' ' * indent + s
         brackets = ''
         if self.l is not None:
