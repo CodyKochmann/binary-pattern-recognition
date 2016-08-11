@@ -2,7 +2,7 @@
 # @Author: cody
 # @Date:   2016-07-21 08:13:01
 # @Last Modified 2016-08-11
-# @Last Modified time: 2016-08-11 11:34:04
+# @Last Modified time: 2016-08-11 11:37:48
 
 from collections import deque
 
@@ -14,14 +14,6 @@ def longest_key(input_dict):
         if k > longest:
             longest = k
     return longest
-
-
-def list_total(input_list):
-    out = 0.0
-    for i in input_list:
-        out += i
-    return out
-
 
 def calculate_similarity(list_one, list_two):
     best_score = 0.0
@@ -316,7 +308,7 @@ class Binary_Tangent(object):
         # print 'based on {} patterns in the past'.format(int(list_total(predictions.values())))
         return {
             "confidence_score": final_score,
-            "similar_patterns": int(list_total(predictions.values()))
+            "similar_patterns": int(sum(predictions.values()))
         }
 
     """===================================================================
