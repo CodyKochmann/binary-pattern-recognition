@@ -2,13 +2,14 @@
 # @Author: cody
 # @Date:   2016-07-21 08:13:01
 # @Last Modified 2016-08-11
-# @Last Modified time: 2016-08-11 11:31:42
+# @Last Modified time: 2016-08-11 11:34:04
 
 from collections import deque
 
 def longest_key(input_dict):
+    """ returns the longest key in a dictionary """
     longest = 0
-    for k in input_dict:
+    for k in input_dict.keys():
         k = len(k)
         if k > longest:
             longest = k
