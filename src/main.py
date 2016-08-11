@@ -2,15 +2,16 @@
 # @Author: cody
 # @Date:   2016-07-21 08:13:01
 # @Last Modified 2016-08-11
-# @Last Modified time: 2016-08-11 11:16:14
+# @Last Modified time: 2016-08-11 11:18:12
 
 from collections import deque
 
 def longest_key(input_dict):
     longest = 0
     for k in input_dict:
-        if len(k) > longest:
-            longest = len(k)
+        k = len(k)
+        if k > longest:
+            longest = k
     return longest
 
 
