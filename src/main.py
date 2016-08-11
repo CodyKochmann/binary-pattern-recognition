@@ -2,7 +2,7 @@
 # @Author: cody
 # @Date:   2016-07-21 08:13:01
 # @Last Modified 2016-08-11
-# @Last Modified time: 2016-08-11 11:22:10
+# @Last Modified time: 2016-08-11 11:31:42
 
 from collections import deque
 
@@ -143,8 +143,11 @@ class Binary_Pattern_Analysis(object):
 
 
 class Binary_Tangent(object):
-    # noinspection PyDefaultArgument
     def __init__(self, children=[], parent=None):
+        """
+            r = child node if its true
+            l = child node if its false
+        """
         self.r = None
         self.l = None
         if len(children):
@@ -158,9 +161,9 @@ class Binary_Tangent(object):
         else:
             self.depth = 0
         if len(children):
-            if children[0]:
+            if children[0]: # if the next child is True
                 self.r = Binary_Tangent(children, self)
-            else:
+            else: # if the next child is False
                 self.l = Binary_Tangent(children, self)
 
     def get_root(self):
@@ -228,7 +231,6 @@ class Binary_Tangent(object):
             for pattern in root_node.child_patterns(node, min_pattern_depth, pattern_size_limit):
                 yield pattern
 
-    # noinspection PyBroadException
     def find_patterns(self, pattern_size_limit=0):
         root_node = self.get_root()
         analysis = Binary_Pattern_Analysis()
@@ -242,12 +244,10 @@ class Binary_Tangent(object):
     def last_nodes(self, node_count):
         if node_count > self.count_nodes(self):
             node_count = self.count_nodes(self)
-        # noinspection PyShadowingNames
         t = self.get_last_child()
         out = []
         while node_count > len(out):
             out.append(t.val)
-            # noinspection PyShadowingNames
             t = t.parent
         return out
 
