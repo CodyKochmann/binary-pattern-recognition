@@ -2,7 +2,7 @@
 # @Author: cody
 # @Date:   2016-07-21 08:13:01
 # @Last Modified 2016-08-11
-# @Last Modified time: 2016-08-11 11:18:12
+# @Last Modified time: 2016-08-11 11:22:10
 
 from collections import deque
 
@@ -283,8 +283,13 @@ class Binary_Tangent(object):
                     predictions[output_key] = tmp[k]
                     # print 'sig values: {}'.format(output_key)
 
+        # return if there isn't enough data to make a prediction
         if not len(predictions):
-            return 'not enough data'
+            return {
+                'confidene_score':0.0,
+                'similar_patterns':0,
+                'message':'not enough data'
+            }
         # if there were any predictions at this point, it would look like this
         # predictions = {'TF': 1, 'TFF': 1, 'T': 2}
         scores = [0.0] * longest_key(predictions)
