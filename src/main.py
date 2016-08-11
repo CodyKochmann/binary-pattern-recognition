@@ -2,7 +2,7 @@
 # @Author: cody
 # @Date:   2016-07-21 08:13:01
 # @Last Modified 2016-08-11
-# @Last Modified time: 2016-08-11 11:10:45
+# @Last Modified time: 2016-08-11 11:13:13
 
 from collections import deque
 
@@ -336,14 +336,13 @@ class Binary_Tangent(object):
         """ calculates the indent for the current node compared to the root """
         depth = node.depth
         indent = node.root_indent()
-        _ = node.get_root()
-        i = 0
-        while i < depth:
-            i += 1
-            _ = _.get_child()
-            if _.val == True:
+        node = node.get_root()
+        while depth:
+            depth -= 1
+            node = node.get_child()
+            if node.val == True:
                 indent += 2
-            if _.val == False:
+            if node.val == False:
                 indent -= 2
         return indent
 
