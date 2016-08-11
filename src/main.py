@@ -2,7 +2,7 @@
 # @Author: cody
 # @Date:   2016-07-21 08:13:01
 # @Last Modified 2016-08-11
-# @Last Modified time: 2016-08-11 10:48:03
+# @Last Modified time: 2016-08-11 10:50:55
 
 from collections import deque
 
@@ -385,9 +385,8 @@ class Binary_Tangent(object):
 
     @staticmethod
     def gen_pattern_tree():
-        print 'self.gen_pattern_tree() is not complete.'
-        exit()
-
+        """ this will convert the Binary_Tangent into a Pattern_Tree """
+        pass
 
 def random_binary_pattern(length=16):
     from random import randint
