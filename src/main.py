@@ -2,12 +2,23 @@
 # @Author: cody
 # @Date:   2016-07-21 08:13:01
 # @Last Modified 2016-08-11
-# @Last Modified time: 2016-08-11 13:30:04
+# @Last Modified time: 2016-08-11 13:54:55
 
 import sys
 sys.setrecursionlimit(1000000)
 from random import randint
 from collections import deque
+
+def random_binary_pattern(length=16):
+    """ returns a list of random binary values to test against """
+    out = deque()
+    while len(out) < length:
+        out.append(randint(0, 1) < 1)
+    return list(out)
+
+def line():
+    """ just a cleaner way to put dividers in the code's output """
+    print '========================================================='
 
 def longest_key(input_dict):
     """ returns the longest key in a dictionary """
@@ -25,7 +36,7 @@ def calculate_similarity(l_one, l_two):
     if len(l_one) is len(l_two):
         tests = 1
     else:
-        len(l_one) - len(l_two)
+        tests = len(l_one) - len(l_two)
         if len(l_one) < len(l_two):
             l_two, l_one = l_one, l_two
     for offset in range(tests):
@@ -141,6 +152,7 @@ class Binary_Tangent(object):
             r = child node if its true
             l = child node if its false
         """
+        assert isinstance(children, list), "children needs to be a string: {}".format(children)
         self.r = None
         self.l = None
         if len(children):
@@ -384,19 +396,9 @@ class Binary_Tangent(object):
         """ this will convert the Binary_Tangent into a Pattern_Tree """
         pass
 
-def random_binary_pattern(length=16):
-    """ returns a list of random binary values to test against """
-    out = deque()
-    while len(out) < length:
-        out.append(randint(0, 1) < 1)
-    return list(out)
-
-def line():
-    """ just a cleaner way to put dividers in the code's output """
-    print '========================================================='
 
 
-if __name__ == '__main__':
+def run_test():
     t = Binary_Tangent(random_binary_pattern(128))
     t.render()
     patterns = t.find_patterns()
@@ -407,3 +409,7 @@ if __name__ == '__main__':
     line()
     print 'Calculating a prediction for the next value...'
     print t.calculate_next()
+
+if __name__ == '__main__':
+    run_test()
+
