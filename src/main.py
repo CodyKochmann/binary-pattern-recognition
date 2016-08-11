@@ -2,7 +2,12 @@
 # @Author: cody
 # @Date:   2016-07-21 08:13:01
 # @Last Modified 2016-08-11
-# @Last Modified time: 2016-08-11 13:54:55
+# @Last Modified time: 2016-08-11 14:10:23
+
+"""
+This runs analysis over binary patterns to find similarities in
+the past to make predictions on what will happen next.
+"""
 
 import sys
 sys.setrecursionlimit(1000000)
