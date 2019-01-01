@@ -23,7 +23,7 @@ def random_binary_pattern(length=16):
 
 def line():
     """ just a cleaner way to put dividers in the code's output """
-    print '========================================================='
+    print('=========================================================')
 
 def longest_key(input_dict):
     """ returns the longest key in a dictionary """
@@ -65,7 +65,7 @@ def binary_str_to_pattern(binary_string):
 
 def binary_pattern_to_str(binary_pattern):
     """ converts binary patterns into strings """
-    if isinstance(binary_pattern, basestring):
+    if isinstance(binary_pattern, str):
         return binary_pattern
     out = ''
     for node in binary_pattern:
@@ -141,7 +141,7 @@ class BinaryPatternAnalysis(object):
     def most_common_count(self):
         """ extends most_common to just return the count """
         tmp = self.most_common()
-        return tmp[tmp.keys()[0]]
+        return tmp[list(tmp.keys())[0]]
 
     def display_patterns(self):
         """ prints all patterns in descending order of occurance """
@@ -149,7 +149,7 @@ class BinaryPatternAnalysis(object):
         while greatest_count > 2:
             for k in self.pattern_collection:
                 if self.pattern_collection[k] == greatest_count:
-                    print '{} : {}'.format(k, self.pattern_collection[k])
+                    print('{} : {}'.format(k, self.pattern_collection[k]))
             greatest_count -= 1
 
 
@@ -233,7 +233,7 @@ class BinaryTangent(object):
                 if len(pattern) >= min_length:
                     yield list(pattern)
                 node = node.get_child()
-        except AttributeError, e:
+        except AttributeError as e:
             # attribute errors are thrown when the next child is None
             pass
 
@@ -413,7 +413,7 @@ class BinaryTangent(object):
         else:
             string_form = "F"
         indent = self.get_indent(self)
-        print ' ' * indent + string_form
+        print(' ' * indent + string_form)
         brackets = ''
         if self.l is not None:
             brackets += '/ '
@@ -426,7 +426,7 @@ class BinaryTangent(object):
         if indent == 0:
             brackets = brackets[1:]
         if self.child_count > 0:
-            print ' ' * (indent - 1) + brackets
+            print(' ' * (indent - 1) + brackets)
         if self.r:
             self.r.render()
         elif self.l:
@@ -444,11 +444,11 @@ def run_test():
     tangent.render()
     patterns = tangent.find_patterns()
     line()
-    print 'Collected Patterns:'
+    print('Collected Patterns:')
     patterns.display_patterns()
     line()
-    print 'Calculating a prediction for the next value...'
-    print tangent.calculate_next()
+    print('Calculating a prediction for the next value...')
+    print(tangent.calculate_next())
 
 if __name__ == '__main__':
     run_test()
