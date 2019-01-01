@@ -279,8 +279,8 @@ class BinaryTangent(object):
     def calculate_next(self, nodes_to_consider=6):
         """ This calculates how likely the tangent's next node will be True
         I chose 6 as default since human brains chose 7 to process reliably """
-        if nodes_to_consider > (self.count_nodes(self) / 2):
-            nodes_to_consider = self.count_nodes(self) / 2
+        if nodes_to_consider > (self.count_nodes(self) // 2):
+            nodes_to_consider = self.count_nodes(self) // 2
         binary_pattern = self.last_nodes(nodes_to_consider)
         bin_str = binary_pattern_to_str(binary_pattern)
         # print 'predicting: {}'.format(bin_str)
@@ -313,7 +313,7 @@ class BinaryTangent(object):
         # return if there isn't enough data to make a prediction
         if not len(predictions):
             return {
-                'confidene_score':0.0,
+                'confidence_score':0.0,
                 'similar_patterns':0,
                 'message':'not enough data'
             }
@@ -447,6 +447,7 @@ def run_test():
     print('Collected Patterns:')
     patterns.display_patterns()
     line()
+    print(random_binary_pattern(16))
     print('Calculating a prediction for the next value...')
     print(tangent.calculate_next())
 
